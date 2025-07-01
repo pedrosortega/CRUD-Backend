@@ -38,7 +38,7 @@ const Student = db.define('student',
     {
       type: DataTypes.FLOAT(0.0),
       allowNull: false,
-    }
+    } 
   } 
 )
   const seed = async () => {
