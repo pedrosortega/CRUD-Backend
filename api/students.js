@@ -8,8 +8,7 @@ router.get("/", async (req, res) => {
     const students = await Student.findAll();
     res.send(students);
   } catch(error) {
-    console.log("failed to fetch all users:", error)
-    res.sendStatus(500);
+    res.status(500).json({error: "Failed to fetch tasks"});
   }
 });
 
