@@ -4,6 +4,7 @@ const Student  = require("../database/seed");
 const { request } = require("../app");
 
 // GET all students
+// res.status(200).send(students)
 router.get("/", async (req, res) => {
   try {
     const students = await Student.findAll();
@@ -39,5 +40,8 @@ router.patch("/:id", async (request, response) => {
     res.status(500).json({ error: "Failed to fetch task"})
   }
 })
+
+
+//Delete a task by id
 
 module.exports = router;
