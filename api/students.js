@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();   // // creates a modular router instance ---reusable
-const Student  = require("../database/seed");
-const { request, response } = require("../app");
+const {Campus, Student} = require('../database');
 
 // GET all students
 
