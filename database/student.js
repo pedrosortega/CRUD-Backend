@@ -3,7 +3,7 @@ const { DataTypes } = require("sequelize");
 
 const Student = db.define('student',
   {
-    user_id:
+    id:
     {
       type: DataTypes.INTEGER,
       allowNull: false,
