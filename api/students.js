@@ -3,7 +3,6 @@ const router = express.Router();   // // creates a modular router instance ---re
 const {Campus, Student} = require('../database');
 
 // GET all students
-
 router.get("/", async (req, res) => {
   try {
     const students = await Student.findAll();
@@ -14,19 +13,19 @@ router.get("/", async (req, res) => {
 });
 
 //Get students by id
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (request, response) => {
   try {
-    const student = await Student.findByPk(req.params.id);
+    const student = await Student.findByPk(request.params.id);
+    response.status(200).send(student);
     if (!student) {
-      return res.status(404).json({error: "Student not found"});
+      return response.status(404).json({error: "Student not found"});
     }
-    res.status.apply(200).send(student);
   } catch(error) {
-    res.status(500).json({ error: "Failed to fetch student by id"});
+    response.status(500).json({ error: "Failed to fetch student by id"});
   }
 });
 
-//Patch a task by id
+//Patch a  student by id
 router.patch("/:id", async (request, response) => {
   try {
     const student = await Student.findByPk(request.params.id);
@@ -34,7 +33,7 @@ router.patch("/:id", async (request, response) => {
       return response.status(404).json({error: "Student not found"})
     }
     const updatedStudent = await student.update(request.body);
-    respond.status(200).send(updatedStudent);
+    response.send(updatedStudent);
   } catch (error) {
     response.status(500).json({ error: "Failed to fetch task"})
   }
@@ -56,12 +55,12 @@ router.delete("/:id", async (request, response) => {
 });
 
 //Create a new student;
-router.post("/", async (response, request) => {
+router.post("/", async (request, response) => {
   try {
     const student = await Student.create(request.body);
     response.status(201).send(student);
   } catch (error) {
-    res.status(500).json({error: "Failed to create a student"})
+    response.status(500).json({error: "Failed to create a student"})
   }
 }) 
 
