@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
     const students = await Student.findAll();
     res.status(200).send(students);
   } catch(error) {
-    res.status(500).json({error: "Failed to fetch tasks"});
+    res.status(500).json({error: "Failed to fetch student"});
   }
 });
 
@@ -22,7 +22,7 @@ router.get("/:id", async (req, res) => {
     }
     res.status.apply(200).send(student);
   } catch(error) {
-    res.status(500).json({ error: "Failed to fetch task"});
+    res.status(500).json({ error: "Failed to fetch student by id"});
   }
 });
 

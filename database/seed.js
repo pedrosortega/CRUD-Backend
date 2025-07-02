@@ -1,6 +1,6 @@
 const db = require("./db");
-const { DataTypes } = require("sequelize");
-const { Student, Campus } = require("./index");
+// const { DataTypes } = require("sequelize");
+const { Student, Campus } = require('./index');
 
 const seed = async () => {
   db.logging = false;
@@ -55,12 +55,11 @@ const seed = async () => {
     },
   ]);
 
-  await campuses[0].setUser(students[0]);
-  await campuses[1].setUser(students[1]);
-  await campuses[2].setUser(students[2]);
-  await campuses[3].setUser(students[3]);
+await students[0].setCampus(campuses[0]);
+await students[1].setCampus(campuses[1]);
+await students[2].setCampus(campuses[2]);
+await students[3].setCampus(campuses[3]);
 
-  console.log("Campus : ", campuses[0])
   console.log("🌱 Seeded the database");
   db.close();
 };

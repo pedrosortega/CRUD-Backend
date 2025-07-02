@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const {Campus, Student} = require('../database');
-const { request } = require('../app');
+// const { request } = require('../app');
 
 
 
 // Get all campuses
 router.get('/', async (request, response) => {
     try{
-        const campuses = await Campuses.findAll();
+        const campuses = await Campus.findAll();
         response.status(200).send(campuses);
     } catch(error) {
         console.log("Failed to fetch all ")
@@ -41,11 +41,18 @@ router.patch('/:id', async (request, response) => {
     }
 })
 
-//Delete a campus by id
-router.delete("/:id", async (request, respons) => {
+// Delete a campus by id
+router.delete("/:id", async (request, response) => {
     try {
-        const campus = await 
+        const campus = await Student.findByPk(request.params.id);
+        if(!campus) {
+            return response.status(404).json({error:"Campus not found"})
+        }
+        await campus.destroy();
+        response.sendStatus(200);
     } catch(error) {
-        console.log("error")
+        response.status(500).json({error: "Failed to fetch a task"})
     }
-})
+});
+
+module.exports = router;
