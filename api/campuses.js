@@ -19,8 +19,8 @@ router.get('/', async (request, response) => {
 //Get campuses by id
 router.get("/:id", async (request, response) => {
     try {
-        const campus = await Campuses.findAll();
-        response.status(200).send(campuses);
+        const campus = await Campus.findAll();
+        response.status(200).send(campus);
     } catch(error) {
         console.log("Failed to fetch campus by id")
         response.status(500).json({error: "Failed to fetch campus by id"})
