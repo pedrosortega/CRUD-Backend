@@ -55,7 +55,7 @@ const Student = db.define('student',
   db.close();
 };
 
-seed();
+// seed();
 
 // Table students {
 //   id INTEGER [primary key]
@@ -70,3 +70,4 @@ seed();
 //   id INTEGER [primary key]
 //   name STRING
 // }
+module.exports = Student;
