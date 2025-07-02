@@ -1,15 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const { Duck } = require("../database");
+const Student  = require("../database/seed");
 
 // GET all students
 router.get("/", async (req, res) => {
   try {
-    
+    const students = await Student.findAll();
+    res.send(students);
   } catch(error) {
-    console.log("failed to fetch all users", error)
+    console.log("failed to fetch all users:", error)
+    res.sendStatus(500);
   }
-  res.sendStatus(501);
 });
 
 module.exports = router;
