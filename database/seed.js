@@ -19,10 +19,8 @@ const { DataTypes } = require("sequelize");
 }
   console.log("🌱 Seeded the database");
   db.close();
+};
 
-  const BMCC = async () => {
-  db.logging = false;
-  await db.sync({ force: true }); 
-  }
+// seed();
 
-seed();
+module.exports = Student;
