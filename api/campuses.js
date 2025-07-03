@@ -18,7 +18,9 @@ router.get("/", async (request, response) => {
 //Get campuses by id
 router.get("/:id", async (request, response) => {
   try {
-    const campus = await Campus.findByPk(request.params.id);
+    const campus = await Campus.findByPk(request.params.id, {
+      include: Student,
+    });
     response.status(200).send(campus);
     if (!campus) {
       return res.status(404).json({ error: "Campus not found" });
