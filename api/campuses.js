@@ -46,14 +46,14 @@ router.patch("/:id", async (request, response) => {
 // Delete a campus by id
 router.delete("/:id", async (request, response) => {
   try {
-    const campus = await Student.findByPk(request.params.id);
+    const campus = await Campus.findByPk(request.params.id);
     if (!campus) {
       return response.status(404).json({ error: "Campus not found" });
     }
     await campus.destroy();
-    response.sendStatus(200);
+    response.status(200).json({ message: "Campus deleted successfully" });
   } catch (error) {
-    response.status(500).json({ error: "Failed to fetch a task" });
+    response.status(500).json({ error: "Failed to fetch a campus" });
   }
 });
 

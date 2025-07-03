@@ -35,7 +35,7 @@ router.patch("/:id", async (request, response) => {
     const updatedStudent = await student.update(request.body);
     response.send(updatedStudent);
   } catch (error) {
-    response.status(500).json({ error: "Failed to fetch task"})
+    response.status(500).json({ error: "Failed to fetch student"})
   }
 })
 
@@ -45,12 +45,12 @@ router.delete("/:id", async (request, response) => {
   try {
     const student = await Student.findByPk(request.params.id);
     if (!student) {
-      return response.status(404).json({ error:"Task not found"})
+      return response.status(404).json({ error:"student not found"})
     }
     await student.destroy();
-    response.sendStatus(200);
+    response.status(200).json({ message: "Student deleted successfully" });
   } catch(error) {
-    response.status(500).json({error: "Failed to fetch a task"})
+    response.status(500).json({error: "Failed to delete a student"})
   }
 });
 
