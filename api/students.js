@@ -15,7 +15,9 @@ router.get("/", async (req, res) => {
 //Get students by id
 router.get("/:id", async (request, response) => {
   try {
-    const student = await Student.findByPk(request.params.id);
+    const student = await Student.findByPk(request.params.id, {
+      include: Campus,
+    });
     response.status(200).send(student);
     if (!student) {
       return response.status(404).json({error: "Student not found"});
@@ -24,6 +26,7 @@ router.get("/:id", async (request, response) => {
     response.status(500).json({ error: "Failed to fetch student by id"});
   }
 });
+
 
 //Patch a  student by id
 router.patch("/:id", async (request, response) => {
