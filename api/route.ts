@@ -1,6 +1,6 @@
 const ALLOWED_ORIGIN =
   process.env.NODE_ENV === 'production'
-    ? 'https://crud-frontend-k8z13a1vr-markfartushniaks-projects.vercel.app'
+    ? 'https://crud-frontend-iota-two.vercel.app/'
     : 'http://localhost:3000';
 
 export async function OPTIONS() {
