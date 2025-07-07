@@ -1,11 +1,9 @@
-require("dotenv").config();                               //enviormemt variables
+require("dotenv").config(); //enviormemt variables
 const express = require("express");
 const morgan = require("morgan");
 const path = require("path");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
-// cookie parser middleware
-app.use(cookieParser());
 const app = express();
 const apiRouter = require("./api");
 const { router: authRouter } = require("./auth");
