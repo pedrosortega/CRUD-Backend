@@ -5,7 +5,8 @@ const {Campus, Student} = require('../database');
 
 //Middleware for isUser
 const isUser = (req, res, next) => {
-  if (req.user) {
+  const isAuthenticated = false;
+  if (isAuthenticated) {
     next();
   } else {
     res.status(403).send({ error: "User not authenticated" });
@@ -54,7 +55,7 @@ router.patch("/:id", isUser, async (request, response) => {
 
 
 //Delete a student by id
-router.delete("/:id",isUser, async (request, response) => {
+router.delete("/:id", isUser, async (request, response) => {
   try {
     const student = await Student.findByPk(request.params.id);
     if (!student) {
