@@ -23,6 +23,15 @@ const authenticateJWT = (req, res, next) => {
   });
 };
 
+//USER AUTHENTICATION ROUTES
+const isUser = (req, res, next) => {
+  if (req.user) {
+    next();
+  } else {
+    res.status(403).send({ error: "User not authenticated" });
+  }
+};
+
 // Signup route
 router.post("/signup", async (req, res) => {
   try {

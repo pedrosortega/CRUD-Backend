@@ -2,6 +2,16 @@ const express = require("express");
 const router = express.Router();   // // creates a modular router instance ---reusable
 const {Campus, Student} = require('../database');
 
+
+//Middleware for isUser
+const isUser = (req, res, next) => {
+  if (req.user) {
+    next();
+  } else {
+    res.status(403).send({ error: "User not authenticated" });
+  }
+};
+
 // GET all students
 router.get("/", async (req, res) => {
   try {
@@ -29,7 +39,7 @@ router.get("/:id", async (request, response) => {
 
 
 //Patch a  student by id
-router.patch("/:id", async (request, response) => {
+router.patch("/:id", isUser, async (request, response) => {
   try {
     const student = await Student.findByPk(request.params.id);
     if (!student) {
@@ -44,7 +54,7 @@ router.patch("/:id", async (request, response) => {
 
 
 //Delete a student by id
-router.delete("/:id", async (request, response) => {
+router.delete("/:id",isUser, async (request, response) => {
   try {
     const student = await Student.findByPk(request.params.id);
     if (!student) {
@@ -58,7 +68,7 @@ router.delete("/:id", async (request, response) => {
 });
 
 //Create a new student;
-router.post("/", async (request, response) => {
+router.post("/", isUser, async (request, response) => {
   try {
     const student = await Student.create(request.body);
     response.status(201).send(student);
